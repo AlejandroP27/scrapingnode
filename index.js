@@ -5,16 +5,45 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.get('/scrape', async (req, res) => {
-    const browser = await chromium.launch({ headless: true });
-    const page = await browser.newPage();
-    
-    await page.goto('https://www.riamoneytransfer.com/es-es/send-money-to-bolivia/');
-    
-    const content = await page.content(); // Obtén el contenido de la página
-    
-    await browser.close();
-    
-    res.json({ data: content });
+    try {
+        // Lanzar el navegador
+        const browser = await chromium.launch({ headless: true });
+        const userAgentStrings = [
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36',
+            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
+            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36',
+          ];
+          const context = await browser.newContext({
+            userAgent: userAgentStrings[Math.floor(Math.random() * userAgentStrings.length)],
+          });
+        
+          const page = await context.newPage();
+            
+            // Close the browser
+        
+        /* const page = await browser.newPage(); */
+        
+        // Navegar a la página objetivo
+        await page.goto('https://www.riamoneytransfer.com/es-es/send-money-to-bolivia');
+
+        // Esperar hasta que se cargue el contenido dinámico
+
+        await page.waitForSelector('.text-promo-rate'); // Cambia el selector por el adecuado
+        // Extraer el contenido dinámico
+        const dynamicContent = await page.evaluate(() => {
+            return document.querySelector('.text-promo-rate').innerText; // Cambia el selector
+        });
+
+        // Cerrar el navegador
+        await browser.close();
+
+        // Enviar la respuesta con el contenido dinámico
+        res.json({ data: dynamicContent });
+    } catch (error) {
+        console.error('Error en el scraping:', error);
+        res.status(500).json({ error: 'Error al hacer scraping de la página' });
+    }
 });
 
 app.listen(port, () => {
