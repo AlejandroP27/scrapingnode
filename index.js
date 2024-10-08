@@ -98,7 +98,7 @@ app.get('/scrape', async (req, res) => {
         // Navegar a la página objetivo
         /* await page.goto('https://www.riamoneytransfer.com/es-es/send-money-to-bolivia'); */
         await page.goto('https://www.riamoneytransfer.com/es-es/');
-        await page.click('text=Rechazar cookies');
+        await page.click('text=Accept');
         await page.click('.dropdown-container');
         await page.waitForTimeout(1000);
         await page.waitForSelector('.list-search-list'); 
