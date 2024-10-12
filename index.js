@@ -136,7 +136,7 @@ app.get('/scrape', async (req, res) => {
         });
 
         // Cerrar el navegador
-        /* await browser.close(); */
+        await browser.close();
 
         // Enviar la respuesta con el contenido dinámico
         res.json({ data: dynamicContent });
