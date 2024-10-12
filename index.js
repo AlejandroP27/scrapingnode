@@ -125,7 +125,7 @@ app.get('/scrape', async (req, res) => {
         await page.click('.dropdown-container');
         await page.waitForTimeout(1000);
         await page.waitForSelector('.list-search-list'); 
-        await page.click('.list-search-list li:nth-child(27)');
+        await page.click('.list-search-list li:nth-child(26)');
         // Esperar hasta que se cargue el contenido dinámico
         await page.waitForTimeout(1000);
 
