@@ -78,7 +78,7 @@ app.use(cors({
 app.get('/scrape', async (req, res) => {
     try {
         // Lanzar el navegador
-        const browser = await chromium.launch({ headless: true });
+        const browser = await chromium.launch({ headless: false });
         const userAgentStrings = [
             'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
             'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36',
@@ -90,6 +90,7 @@ app.get('/scrape', async (req, res) => {
           });
         
           const page = await context.newPage();
+
             
             // Close the browser
         
@@ -97,8 +98,30 @@ app.get('/scrape', async (req, res) => {
         
         // Navegar a la página objetivo
         /* await page.goto('https://www.riamoneytransfer.com/es-es/send-money-to-bolivia'); */
-        await page.goto('https://www.riamoneytransfer.com/es-es/');
-        await page.click('.sc-17effe74-7.ecXopu');
+        /* const contenido = await page.evaluate(() => {
+            
+            var cookieBtn = document.querySelector('button.sc-17effe74-7.ecXopu')
+            console.log("ho")
+            console.log(cookieBtn)
+            if(cookieBtn){
+                cookieBtn.click();
+                }
+                }); */     
+                await page.goto('https://www.riamoneytransfer.com/es-es/');
+                
+  try {
+    await page.waitForSelector('div.sc-17effe74-2.ePiGDc', { timeout: 5000 });
+
+    // Hacer clic en el botón con el texto "Rechazar cookies" dentro de ese div
+    await page.click('div.sc-17effe74-2.ePiGDc >> text="Rechazar cookies"');
+  
+    console.log('Botón "Rechazar cookies" clicado correctamente.');
+  } catch (error) {
+    console.log('No se encontró el popup de cookies o ya fue aceptado.');
+  }
+
+
+        /* await page.click('.sc-17effe74-7.ecXopu'); */
         await page.click('.dropdown-container');
         await page.waitForTimeout(1000);
         await page.waitForSelector('.list-search-list'); 
