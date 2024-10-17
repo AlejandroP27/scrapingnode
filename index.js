@@ -135,6 +135,13 @@ app.get('/scrape', async (req, res) => {
             return document.querySelector('.text-promo-rate').innerText; // Cambia el selector
         });
 
+        /* const childProcess = browser.process()
+        if (childProcess) {
+        childProcess.kill(9)
+        } */
+        for (let i = 0; i < page.length; i++) {
+          await page[i].close();
+        }
         // Cerrar el navegador
         await browser.close();
 
