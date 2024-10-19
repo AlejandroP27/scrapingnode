@@ -143,7 +143,7 @@ app.get('/scrape', async (req, res) => {
         res.json({ data: dynamicContent }); */
 
                 // Navegar a la página objetivo
-                await page.goto('https://www.riamoneytransfer.com/es-es/send-money-to-bolivia');
+                /* await page.goto('https://www.riamoneytransfer.com/es-es/send-money-to-bolivia'); */
 
                 // Esperar hasta que se cargue el contenido dinámico
         
