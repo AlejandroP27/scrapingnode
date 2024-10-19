@@ -108,7 +108,7 @@ app.get('/scrape', async (req, res) => {
                 }
                 }); */     
                 /* await page.goto('https://www.riamoneytransfer.com/es-es/'); */
-                await page.goto('https://www.riamoneytransfer.com/es-es/send-money-to-bolivia');
+        await page.goto('https://www.riamoneytransfer.com/es-es/send-money-to-bolivia');
                 
   try {
     await page.waitForSelector('div.sc-17effe74-2.ePiGDc', { timeout: 5000 });
