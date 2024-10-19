@@ -88,7 +88,7 @@ app.get('/scrape', async (req, res) => {
                 userAgent: userAgentStrings[Math.floor(Math.random() * userAgentStrings.length)],
             });
             
-            const page = await context.newPage();
+            /* const page = await context.newPage();
 
             await page.goto('https://www.riamoneytransfer.com/es-es/');
                 
@@ -102,7 +102,7 @@ app.get('/scrape', async (req, res) => {
             } catch (error) {
                 console.log('No se encontró el popup de cookies o ya fue aceptado.');
             }
-
+ */
             try{
                 await page.goto('https://www.riamoneytransfer.com/es-es/');
                 
