@@ -88,9 +88,9 @@ app.get('/scrape', async (req, res) => {
                 userAgent: userAgentStrings[Math.floor(Math.random() * userAgentStrings.length)],
             });
             
-            /* const page = await context.newPage();
+            const page = await context.newPage();
 
-            await page.goto('https://www.riamoneytransfer.com/es-es/');
+           /*  await page.goto('https://www.riamoneytransfer.com/es-es/');
                 
             try {
                 await page.waitForSelector('div.sc-17effe74-2.ePiGDc', { timeout: 5000 });
@@ -101,8 +101,8 @@ app.get('/scrape', async (req, res) => {
                 console.log('Botón "Rechazar cookies" clicado correctamente.');
             } catch (error) {
                 console.log('No se encontró el popup de cookies o ya fue aceptado.');
-            }
- */
+            } */
+
             try{
                 await page.goto('https://www.riamoneytransfer.com/es-es/');
                 
