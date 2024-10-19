@@ -127,7 +127,7 @@ app.get('/scrape', async (req, res) => {
         await page.waitForSelector('.list-search-list'); 
         await page.click('.list-search-list li:nth-child(26)');
         // Esperar hasta que se cargue el contenido dinámico
-        await page.waitForTimeout(1000);
+        await page.waitForTimeout(3000);
 
         await page.waitForSelector('.text-promo-rate'); // Cambia el selector por el adecuado
         // Extraer el contenido dinámico
