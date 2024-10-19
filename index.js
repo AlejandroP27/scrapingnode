@@ -103,7 +103,7 @@ app.get('/scrape', async (req, res) => {
                 console.log('No se encontró el popup de cookies o ya fue aceptado.');
             } */
 
-            try{
+            /* try{ */
                 await page.goto('https://www.riamoneytransfer.com/es-es/');
                 
                 try {
@@ -138,7 +138,7 @@ app.get('/scrape', async (req, res) => {
                 await browser.close();
                 // Enviar la respuesta con el contenido dinámico
                 res.json({ data: dynamicContent });
-            } 
+            /* } 
             catch(e){
                 if (e) {
         
@@ -173,7 +173,7 @@ app.get('/scrape', async (req, res) => {
                     // Enviar la respuesta con el contenido dinámico
                     res.json({ data: dynamicContent });
                 }
-            }
+            } */
         
     } catch (error) {
         console.error('Error en el scraping:', error);
